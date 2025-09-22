@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirection...</title>
+  <script>
+    // Table de correspondance monument -> lien ChatGPT
+    const links = {
+      "tour_eiffel": "https://chatgpt.com/share/68b16f1c-49b8-800a-9b20-d7a5ac44035e",
+      "arc_de_triomphe": "https://chatgpt.com/share/68bfbbfe-bdec-800a-9484-67786ffb0545",
+      "cathedrale_angouleme": "https://chatgpt.com/share/68c07348-80e8-8004-aad2-efdb49142047"
+      // ajouter ici
+    };
+
+    // Lire paramètre ?person=...
+    function getParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    window.onload = () => {
+      const person = getParam("person");
+      const redirectUrl = links[person];
+
+      // Tracker le clic via Google Script
+      if (person) {
+        const img = new Image();
+        img.src = `https://script.google.com/macros/s/AKfycbxos84XxxWVOWvk-_jRcL2apD1JtIB7W0qrB9zUo-AanXMbLx3gZkwX8FrWl66fjgqmPw/exec?person=${person}`;
+      }
+
+      // Rediriger si trouvé
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      } else {
+        document.body.innerHTML = "<p>❌ Monument inconnu</p>";
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Redirection en cours...</p>
+</body>
+</html>
